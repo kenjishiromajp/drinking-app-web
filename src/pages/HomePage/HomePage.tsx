@@ -1,8 +1,10 @@
+import MainLayout from '../../layouts/MainLayout/MainLayout';
+
 function HomePage() {
   return (
-    <div>
+    <MainLayout>
       <h1>HomePage</h1>
-    </div>
+    </MainLayout>
   );
 }
 
