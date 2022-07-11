@@ -19,13 +19,15 @@ export interface PlayersFormValues {
 export interface PlayersFormProps
   extends Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'> {
   onSubmit: (data: PlayersFormValues) => any;
+  defaultValues?: PlayersFormValues;
 }
 export default function PlayersForm({
   onSubmit = () => {},
+  defaultValues = { players: [{ name: '' }] },
   ...props
 }: PlayersFormProps) {
   const { register, handleSubmit, control } = useForm<PlayersFormValues>({
-    defaultValues: { players: [{ name: '' }] },
+    defaultValues,
   });
 
   const { fields, append, remove } = useFieldArray({
