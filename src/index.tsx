@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import theme from './pages/constants/theme';
+import theme from './constants/theme';
 import store from './reducers';
 
 const root = ReactDOM.createRoot(
