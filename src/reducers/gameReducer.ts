@@ -21,6 +21,9 @@ const getCardsThatWereNotPicked = (
   );
 };
 
+const shuffle = (array: any[]) =>
+  array.sort(() => Math.floor(Math.random() * 2) - 1);
+
 const initialState: GameReducerState = {
   rounds: [],
   deck: [],
@@ -42,12 +45,12 @@ const gameReducer = createSlice({
       }: ActionPayload<{ deck: DrinkingGameCard[]; players: Player[] }>,
     ) => {
       // eslint-disable-next-line no-param-reassign
-      state.rounds = [];
+      state.deck = shuffle([...deck]);
       // eslint-disable-next-line no-param-reassign
-      state.deck = deck;
+      state.rounds = [{ ...state.deck[0] }];
       // Shuffling the players
       // eslint-disable-next-line no-param-reassign
-      state.players = players.sort(() => Math.floor(Math.random() * 2) - 1);
+      state.players = shuffle([...players]);
     },
     pickACard: (state: GameReducerState) => {
       const [card] = getCardsThatWereNotPicked(state.deck, state.rounds);

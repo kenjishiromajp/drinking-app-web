@@ -2,11 +2,17 @@
   "name": "drinking-app",
   "version": "0.1.0",
   "private": true,
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.2.1",
     "@chakra-ui/theme": "^2.1.0",
     "@chakra-ui/theme-tools": "^2.0.2",
+    "@craco/craco": "^7.0.0-alpha.7",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@reduxjs/toolkit": "^1.8.3",
@@ -31,9 +37,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

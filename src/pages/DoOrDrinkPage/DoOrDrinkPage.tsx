@@ -1,5 +1,6 @@
 import { VStack } from '@chakra-ui/react';
-import { useEffect, useMemo } from 'react';
+import { compile } from 'handlebars';
+import { useEffect } from 'react';
 import StackCards from '../../components/StackCards/StackCards';
 import { useAppDispatch } from '../../hooks/useAppSelector';
 import useGameSelector from '../../hooks/useGameSelector';
@@ -8,7 +9,7 @@ import usePlayersSelector from '../../hooks/usePlayersSelector';
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import { DrinkingGameCard } from '../../models/DrinkingGameCard';
 import DrinkingGameTypes from '../../models/DrinkingGameTypes';
-import { initGame } from '../../reducers/gameReducer';
+import { initGame, pickACard } from '../../reducers/gameReducer';
 
 const MOCK_DRINKING_GAME_CARDS: DrinkingGameCard[] = [
   {
@@ -35,9 +36,9 @@ function DoOrDrinkPage() {
   const dispatch = useAppDispatch();
   const players = usePlayersSelector(state => state.players);
   const {
-    deck,
+    // deck,
     rounds,
-    // players: [player1, player2],
+    players: [player1, player2],
   } = useGameSelector(state => state);
 
   useEffect(() => {
@@ -46,17 +47,26 @@ function DoOrDrinkPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const roundNumber = useMemo(() => rounds.length + 1, [rounds.length]);
+  const roundNumber = rounds.length;
 
   return (
     <MainLayout>
       <h1>Do or Drink Page</h1>
-      <StackCards>
-        {deck.map(({ phrase }) => {
+      <StackCards
+        onClick={() => {
+          dispatch(pickACard());
+        }}
+      >
+        {rounds.map(({ phrase }) => {
           return (
             <VStack key={phrase}>
               <h3>ROUND {roundNumber}</h3>
-              <p>{phrase}</p>
+              <p>
+                {compile(phrase)({
+                  player1: player1?.name,
+                  player2: player2?.name,
+                })}
+              </p>
             </VStack>
           );
         })}

@@ -1,12 +1,12 @@
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 
-interface StackCardsProps {
+interface StackCardsProps extends BoxProps {
   children: ReactNode[];
 }
-export default function StackCards({ children }: StackCardsProps) {
+export default function StackCards({ children, ...props }: StackCardsProps) {
   return (
-    <Box position="relative">
+    <Box {...props} position="relative">
       {children.map((child, index) => {
         return (
           <Box
