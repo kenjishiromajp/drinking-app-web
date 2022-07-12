@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Player } from '../components/PlayersForm/PlayersForm';
 import type { ActionPayload } from '../models/ActionPayload';
 import { DrinkingGameCard } from '../models/DrinkingGameCard';
 
 export interface GameReducerState {
   deck: DrinkingGameCard[];
   rounds: DrinkingGameCard[];
+  players: Player[];
 }
 
 const getCardsThatWereNotPicked = (
@@ -22,6 +24,7 @@ const getCardsThatWereNotPicked = (
 const initialState: GameReducerState = {
   rounds: [],
   deck: [],
+  players: [],
 };
 
 const gameReducer = createSlice({
@@ -34,12 +37,17 @@ const gameReducer = createSlice({
     },
     initGame: (
       state: GameReducerState,
-      { payload }: ActionPayload<DrinkingGameCard[]>,
+      {
+        payload: { deck, players },
+      }: ActionPayload<{ deck: DrinkingGameCard[]; players: Player[] }>,
     ) => {
       // eslint-disable-next-line no-param-reassign
       state.rounds = [];
       // eslint-disable-next-line no-param-reassign
-      state.deck = payload;
+      state.deck = deck;
+      // Shuffling the players
+      // eslint-disable-next-line no-param-reassign
+      state.players = players.sort(() => Math.floor(Math.random() * 2) - 1);
     },
     pickACard: (state: GameReducerState) => {
       const [card] = getCardsThatWereNotPicked(state.deck, state.rounds);

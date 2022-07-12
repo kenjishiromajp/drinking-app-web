@@ -1,8 +1,8 @@
 import { PlayersReducerState } from '../reducers/playerReducer';
 import { useAppSelector } from './useAppSelector';
 
-const usePlayersSelector = (
-  callback: (playersState: PlayersReducerState) => any,
-) => useAppSelector(state => callback(state.players));
+const usePlayersSelector = <T = any>(
+  callback: (playersState: PlayersReducerState) => T,
+) => useAppSelector<T>(state => callback(state.players));
 
 export default usePlayersSelector;
