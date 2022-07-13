@@ -6,9 +6,11 @@ import {
   Input,
   HStack,
   Box,
+  IconButton,
 } from '@chakra-ui/react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { FormHTMLAttributes } from 'react';
+import { CloseIcon } from '@chakra-ui/icons';
 
 export interface Player {
   name: string;
@@ -45,7 +47,12 @@ export default function PlayersForm({
                 <FormLabel>Player {index + 1}</FormLabel>
                 <Input {...register(`players.${index}.name`)} />
               </Box>
-              <Button onClick={() => remove(index)}>Remove</Button>
+              <IconButton
+                bg="none"
+                aria-label="Remove"
+                icon={<CloseIcon />}
+                onClick={() => remove(index)}
+              />
             </HStack>
           </FormControl>
         ))}
