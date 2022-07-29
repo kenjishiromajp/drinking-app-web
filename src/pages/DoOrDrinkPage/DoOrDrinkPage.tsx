@@ -7,7 +7,6 @@ import { GET_CARDS } from '../../graphql/queries';
 import { useAppDispatch } from '../../hooks/useAppSelector';
 import useGameSelector from '../../hooks/useGameSelector';
 import usePlayersSelector from '../../hooks/usePlayersSelector';
-// import { useAppDispatch } from '../../hooks/useAppSelector';
 
 import MainLayout from '../../layouts/MainLayout/MainLayout';
 import { DrinkingGameCard } from '../../models/DrinkingGameCard';
@@ -15,17 +14,14 @@ import { initGame, pickACard } from '../../reducers/gameReducer';
 
 function DoOrDrinkPage() {
   const dispatch = useAppDispatch();
-  const players = usePlayersSelector(state => state.players);
-  const {
-    rounds,
-    players: [player1, player2],
-  } = useGameSelector(state => state);
+  const allPlayers = usePlayersSelector(state => state.players);
+  const { rounds, players } = useGameSelector(state => state);
 
   const { data } = useQuery<{ cards: DrinkingGameCard[] }>(GET_CARDS);
 
   useEffect(() => {
     if (data) {
-      dispatch(initGame({ deck: data.cards, players }));
+      dispatch(initGame({ deck: data.cards, players: allPlayers }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
@@ -44,7 +40,7 @@ function DoOrDrinkPage() {
             dispatch(pickACard());
           }}
         >
-          {rounds.map(({ phrase }) => {
+          {rounds.map(({ phrase, numberOfPlayers }) => {
             return (
               <VStack flex="1" key={phrase}>
                 <h3>ROUND {roundNumber}</h3>
@@ -59,10 +55,18 @@ function DoOrDrinkPage() {
                     textAlign="center"
                     className="cursive"
                     dangerouslySetInnerHTML={{
-                      __html: compile(phrase)({
-                        player1: `<strong>${player1?.name}</strong>`,
-                        player2: `<strong>${player2?.name}</strong>`,
-                      }),
+                      __html: compile(phrase)(
+                        Array(numberOfPlayers)
+                          .fill('')
+                          .reduce((acc, _, index) => {
+                            return {
+                              ...acc,
+                              [`player${
+                                index + 1
+                              }`]: `<strong>${players[index]?.name}</strong>`,
+                            };
+                          }, {}),
+                      ),
                     }}
                   />
                 </Box>
