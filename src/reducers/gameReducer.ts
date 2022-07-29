@@ -59,6 +59,8 @@ const gameReducer = createSlice({
       }
       // eslint-disable-next-line no-param-reassign
       state.rounds = [...state.rounds, card];
+      // eslint-disable-next-line no-param-reassign
+      state.players = shuffle([...state.players]);
     },
   },
 });

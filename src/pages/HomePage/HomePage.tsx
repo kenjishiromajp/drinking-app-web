@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import PlayersForm, {
   PlayersFormValues,
@@ -14,7 +15,9 @@ function HomePage() {
 
   return (
     <MainLayout>
-      <h1>Register your players</h1>
+      <Text as="h1" fontSize="4xl" textAlign="center" marginBottom="5">
+        Register your players
+      </Text>
       <PlayersForm
         defaultValues={{ players }}
         onSubmit={(data: PlayersFormValues) => {
