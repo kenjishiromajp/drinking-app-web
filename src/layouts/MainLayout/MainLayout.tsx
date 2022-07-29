@@ -7,7 +7,7 @@ interface MainLayoutProps {
 }
 function MainLayout({ children }: MainLayoutProps) {
   return (
-    <VStack flexDirection="column" minHeight="100vh">
+    <VStack bg="#f44336" spacing={0} flexDirection="column" minHeight="100vh">
       <Header width="100%" />
       <Container display="flex" flexDirection="column" flex="1">
         {children}

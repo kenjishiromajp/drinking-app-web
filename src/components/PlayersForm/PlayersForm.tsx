@@ -44,8 +44,8 @@ export default function PlayersForm({
           <FormControl key={field.id}>
             <HStack alignItems="end">
               <Box flex="1">
-                <FormLabel>Player {index + 1}</FormLabel>
-                <Input {...register(`players.${index}.name`)} />
+                <FormLabel>PLAYER {index + 1}</FormLabel>
+                <Input bg="white" {...register(`players.${index}.name`)} />
               </Box>
               <IconButton
                 bg="none"
