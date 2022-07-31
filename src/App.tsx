@@ -3,6 +3,7 @@ import './App.css';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import AVAILABLE_GAMES from './constants/availableGames';
 import GameSelectionPage from './pages/GameSelectionPage/GameSelectionPage';
+import RegisterCardPage from './pages/RegisterCardPage/RegisterCardPage';
 import HomePage from './pages/HomePage/HomePage';
 
 const client = new ApolloClient({
@@ -21,6 +22,7 @@ function App() {
             <Route key={path} path={path} element={element} />
           ))}
         </Route>
+        <Route path="/register-card" element={<RegisterCardPage />} />
       </Routes>
     </ApolloProvider>
   );

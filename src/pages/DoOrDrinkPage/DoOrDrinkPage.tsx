@@ -1,23 +1,20 @@
-import { useQuery } from '@apollo/client';
 import { VStack, Text, Box } from '@chakra-ui/react';
 import { compile } from 'handlebars';
 import { useEffect } from 'react';
 import StackCards from '../../components/StackCards/StackCards';
-import { GET_CARDS } from '../../graphql/queries';
 import { useAppDispatch } from '../../hooks/useAppSelector';
 import useGameSelector from '../../hooks/useGameSelector';
+import useCards from '../../hooks/useCards';
 import usePlayersSelector from '../../hooks/usePlayersSelector';
 
 import MainLayout from '../../layouts/MainLayout/MainLayout';
-import { DrinkingGameCard } from '../../models/DrinkingGameCard';
 import { initGame, pickACard } from '../../reducers/gameReducer';
 
 function DoOrDrinkPage() {
   const dispatch = useAppDispatch();
   const allPlayers = usePlayersSelector(state => state.players);
   const { rounds, players } = useGameSelector(state => state);
-
-  const { data } = useQuery<{ cards: DrinkingGameCard[] }>(GET_CARDS);
+  const { data } = useCards();
 
   useEffect(() => {
     if (data) {

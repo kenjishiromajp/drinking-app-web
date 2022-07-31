@@ -44,7 +44,9 @@ export default function PlayersForm({
           <FormControl key={field.id}>
             <HStack alignItems="end">
               <Box flex="1">
-                <FormLabel>PLAYER {index + 1}</FormLabel>
+                <FormLabel color="#4b0a04" fontWeight={700}>
+                  PLAYER {index + 1}
+                </FormLabel>
                 <Input bg="white" {...register(`players.${index}.name`)} />
               </Box>
               <IconButton
@@ -56,22 +58,13 @@ export default function PlayersForm({
             </HStack>
           </FormControl>
         ))}
-        <Button
-          // bg="blue.400"
-          // color="white"
-          // _hover={{
-          //   bg: 'blue.500',
-          // }}
-          onClick={() => append({ name: '' })}
-        >
-          Add player
-        </Button>
+        <Button onClick={() => append({ name: '' })}>Add player</Button>
         <Button
           type="submit"
-          bg="blue.400"
+          bg="red.700"
           color="white"
           _hover={{
-            bg: 'blue.500',
+            bg: 'red.600',
           }}
         >
           Save

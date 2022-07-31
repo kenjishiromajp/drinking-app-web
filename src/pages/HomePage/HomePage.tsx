@@ -15,7 +15,17 @@ function HomePage() {
 
   return (
     <MainLayout>
-      <Text as="h1" fontSize="4xl" textAlign="center" marginBottom="5">
+      <Text
+        as="h1"
+        fontSize="4xl"
+        textAlign="center"
+        marginBottom="5"
+        className="cursive"
+        fontWeight={700}
+        color="white"
+        textShadow="4px 4px #ec38bc, 8px 8px #7303c0"
+        transform="skewY(-2deg)"
+      >
         Register your players
       </Text>
       <PlayersForm
